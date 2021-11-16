@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Password Meter</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+    <h1 id="h1">Password Strength Meter</h1>
+    <form>
+        <div class="main">
+        <div class="cen" id="showH">
+        <label id="l1">Show your Password:</label>
+        <input type="checkbox" id="showhide" onclick="toggleShowHide(this)"/>
+    </div>
+    <div id="d2">
+        <label id="l2">Password:</label>
+        <input id="pass1" type="password" onkeyup="checkPassword(this.value);" placeholder="Type a Password" value=""/>
+        <span id="mssg" class="pmshow">No Password</span>
+        <button id="btn1" type="button">Reset</button>
+    </div>
+    
+    <div class="cen">
+        Characters containing:
+        <span id="char_count" onmouseover="countchar()">Hover Here</span>
+    </div>
+    
+</div>
+</form>
+    </body>
+    <script>
+        function toggleShowHide(thisvalue) {
+            if (thisvalue.checked) {
+                document.getElementById("pass1").type = "text";} 
+    
+                else {
+                    document.getElementById("pass1").type = "password";
+                }
+            }
+    document.getElementById("char_count").addEventListener("mouseover",function(){
+            var pass=document.getElementById("pass1").value;
+            document.getElementById("char_count").innerHTML = pass.length;
+        });
+    document.getElementById("btn1").addEventListener("click",function(){
+        location.reload();
+    });
+    function checkPassword(password)
+    {
+        var d2=document.getElementById("d2");
+        var low=new RegExp("^(?=.*[a-z])(?=.*[0-9])");
+        var med=new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])");
+        var high=new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])");
+        if(high.test(password))
+        {
+            document.getElementById("mssg").innerHTML="Uncrackable";
+            d2.style.backgroundColor="#2cb117";   
+        }
+        else if(med.test(password))
+        {
+            document.getElementById("mssg").innerHTML="Strong";
+            d2.style.backgroundColor="#0057d9";   
+        }
+        else if(low.test(password))
+        {
+            document.getElementById("mssg").innerHTML="Moderate";
+            d2.style.backgroundColor="#fd8d00";   
+        }
+        else
+        {
+            document.getElementById("mssg").innerHTML="Weak";
+            d2.style.backgroundColor="#e40808";   
+        }
+    }
+        </script>
+</html>
