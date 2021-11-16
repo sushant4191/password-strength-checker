@@ -51,9 +51,9 @@
     function checkPassword(password)
     {
         var d2=document.getElementById("d2");
-        var low=new RegExp("^(?=.*[a-z])(?=.*[0-9])");
-        var med=new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])");
-        var high=new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])");
+        var low=new RegExp("^(?=.*[a-z])(?=.*[0-9])(?=.{3,})");
+        var med=new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})");
+        var high=new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
         if(high.test(password))
         {
             document.getElementById("mssg").innerHTML="Uncrackable";
